@@ -1,6 +1,6 @@
 # nuxt-web3
 
-> My best Nuxt.js project
+This is sample project of using Ethereum / web3 on Nuxt
 
 ## Build Setup
 
@@ -19,4 +19,7 @@ $ yarn start
 $ yarn generate
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+## Velification
+- access localhost:3000 by browser
+- check console log
+- Block Height Number is appeared
