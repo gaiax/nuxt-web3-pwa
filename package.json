@@ -14,5 +14,7 @@
     "nuxt": "^2.0.0",
     "web3": "1.2.4"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "truffle": "5.1.1"
+  }
 }
