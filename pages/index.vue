@@ -3,26 +3,32 @@
     <div>
       <logo />
       <h1 class="title">
-        nuxt-web3
+        nuxt-web3-contract
       </h1>
       <h2 class="subtitle">
         My best Nuxt.js project
       </h2>
       <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
+        <input
+          type="text"
+          v-model="inputNumber"
+          placeholder="input number"
         >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
+        <button
+          @click="setNumber()"
         >
-          GitHub
-        </a>
+          Set Number to contract
+        </button>
+      </div>
+      <div class="links">
+        <button
+          @click="getNumber()"
+        >
+          Get Number from contract
+        </button>
+      </div>
+      <div>
+        Number:{{number}}
       </div>
     </div>
   </div>
@@ -32,6 +38,28 @@
 import Logo from '~/components/Logo.vue'
 
 export default {
+  data() { 
+    return {
+      number: 0,
+      inputNumber: 0
+    }
+  },
+  methods: {
+    getNumber: async function() {
+      let ret = await this.$contract.methods.get().call()
+      console.log(this.$contract)
+      console.log(ret)
+      this.number = ret
+    },
+    setNumber: async function() {
+      let accounts = await this.$web3.eth.getAccounts()
+      let account = accounts[0]
+      console.log(accounts)
+      console.log(this.inputNumber)
+      let ret = await this.$contract.methods.set(this.inputNumber).send({from: account})
+      console.log(ret)
+    },
+  },
   components: {
     Logo
   },
