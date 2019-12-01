@@ -1,4 +1,5 @@
 import Web3 from "web3"
+import artifacts from "~~/build/contracts/SingleNumRegister.json"
 
 export default async function(context, inject) {
     let web3
@@ -15,6 +16,13 @@ export default async function(context, inject) {
         const httpEndpoint = 'http://127.0.0.1:7545'
         web3 = new Web3(new Web3.providers.HttpProvider(httpEndpoint))
     }
+    let networkId = await web3.eth.net.getId()
 
-    inject('web3',web3)
+let contract = new web3.eth.Contract(
+    artifacts.abi,
+    artifacts.networks[networkId].address
+)
+
+inject('web3',web3)
+inject('contract',contract)
 }
