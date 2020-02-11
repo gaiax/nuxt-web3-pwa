@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-web3-contract",
+  "name": "nuxt-web3-firebase-hosting",
   "version": "1.0.0",
   "description": "My best Nuxt.js project",
   "author": "Aram Mine",
@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "nuxt": "^2.0.0",
+    "truffle-hdwallet-provider": "1.0.17",
     "web3": "1.2.4"
   },
   "devDependencies": {
