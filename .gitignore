@@ -91,4 +91,10 @@ sw.*
 
 # contract
 build/contracts
+
+#direnv
 .envrc
+
+#Firebase
+.firebase/
+public/*
