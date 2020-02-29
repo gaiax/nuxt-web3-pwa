@@ -48,6 +48,16 @@ module.exports = {
       network_id: "*" // Any network (default: none)
     },
 
+    private: {
+      provider: new HDWalletProvider(
+        process.env.MNEMONIC,
+        "https://privatechain.example.com:8545", // change address to your private chain
+        0
+      ),
+      network_id: "*",
+      gasPrice: 0
+    },
+
     // Another network with more advanced options...
     // advanced: {
     // port: 8777,             // Custom port
