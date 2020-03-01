@@ -51,7 +51,7 @@ module.exports = {
     private: {
       provider: new HDWalletProvider(
         process.env.MNEMONIC,
-        "https://privatechain.example.com:8545", // change address to your private chain
+        process.env.PRIVATE, // change address to your private chain
         0
       ),
       network_id: "*",
