@@ -1,10 +1,10 @@
-# nuxt-web3
+# nuxt-web3-privatechain
 
 This is sample project of using Ethereum / web3 on Nuxt
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ yarn install
 
@@ -20,6 +20,7 @@ $ yarn generate
 ```
 
 ## Velification
+
 - access localhost:3000 by browser
 - check console log
 - Block Height Number is appeared

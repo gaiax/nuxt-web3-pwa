@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-web3-firebase-hosting",
+  "name": "nuxt-web3-nometamask",
   "version": "1.0.0",
   "description": "My best Nuxt.js project",
   "author": "Aram Mine",
@@ -11,7 +11,10 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "ethereumjs-common": "1.5.0",
+    "ethereumjs-tx": "2.1.2",
     "firebase": "7.9.3",
+    "js-sha256": "0.9.0",
     "nuxt": "^2.0.0",
     "truffle-hdwallet-provider": "1.0.17",
     "web3": "1.2.4"

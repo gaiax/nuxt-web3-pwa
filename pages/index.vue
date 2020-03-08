@@ -2,9 +2,14 @@
     <div class="container">
         <div>
             <logo />
-            <h1 class="title">nuxt-web3-firebase-hosting</h1>
+            <h1 class="title">nuxt-web3-nometamask</h1>
             <h2 class="subtitle">My best Nuxt.js project</h2>
-            <div class="links">
+
+            <div class="links" v-if="!isSignedIn">
+                <button @click="signIn()">Sign In</button>
+            </div>
+
+            <div class="links" v-if="isSignedIn">
                 <input type="text" v-model="inputNumber" placeholder="input number" />
                 <button @click="setNumber()">Set Number to contract</button>
             </div>
@@ -18,12 +23,18 @@
 
 <script>
 import Logo from "~/components/Logo.vue";
+import toContract from "~/plugins/toContract.js";
+import firebase from "firebase";
+import sha256 from "js-sha256";
 
 export default {
     data() {
         return {
             number: 0,
-            inputNumber: 0
+            inputNumber: 0,
+            isSignedIn: false,
+            pk: "",
+            address: ""
         };
     },
     methods: {
@@ -34,20 +45,54 @@ export default {
             this.number = ret;
         },
         setNumber: async function() {
-            let accounts = await this.$web3.eth.getAccounts();
-            let account = accounts[0];
-            console.log(accounts);
-            console.log(this.inputNumber);
-            let ret = await this.$contract.methods
+            const functionAbi = await this.$contract.methods
                 .set(this.inputNumber)
-                .send({ from: account });
-            console.log(ret);
+                .encodeABI();
+
+            let result = await toContract(
+                this,
+                this.address,
+                this.privateKey,
+                functionAbi
+            );
+        },
+        signIn: function() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithRedirect(provider);
         }
     },
     components: {
         Logo
     },
     mounted() {
+        if (!firebase.apps.length) {
+            var firebaseConfig = {
+                apiKey: process.env.APIKEY,
+                authDomain: process.env.AUTHDOMAIN
+            };
+            firebase.initializeApp(firebaseConfig);
+        }
+        var self = this;
+        firebase
+            .auth()
+            .getRedirectResult()
+            .then(function(result) {
+                if (result.credential) {
+                    let user = result.user;
+                    self.isSignedIn = true;
+                    console.log(user.uid);
+                    self.privateKey = "0x" + sha256.hex(user.uid);
+                    self.address = self.$web3.eth.accounts.privateKeyToAccount(
+                        self.privateKey
+                    ).address;
+                    self.$web3.eth.defaultAccount = self.address;
+                    console.log("Address:" + self.address);
+                }
+            })
+            .catch(function(error) {
+                let errorMessage = error.message;
+                console.log(errorMessage);
+            });
         console.log("Current Block Number");
         this.$web3.eth.getBlockNumber().then(console.log);
     }

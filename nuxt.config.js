@@ -3,6 +3,11 @@ export default {
   generate: {
     dir: "public"
   },
+  env: {
+    APIKEY: process.env.APIKEY,
+    AUTHDOMAIN: process.env.AUTHDOMAIN,
+    PRIVATE: process.env.PRIVATE || "http://localhost:8545"
+  },
   /*
    ** Headers of the page
    */
