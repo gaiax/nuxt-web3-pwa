@@ -43,7 +43,7 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+  modules: ["@nuxtjs/pwa"],
   /*
    ** Build configuration
    */
@@ -52,5 +52,18 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+  manifest: {
+    name: "nuxt-web3-pwa",
+    title: "nuxt-web3-pwa",
+    "og:title": "nuxt-web3-pwa",
+    description: "nuxt-web3-pwaのDescription",
+    "og:description": "nuxt-web3-pwaのDescription",
+    lang: "ja",
+    theme_color: "#41b883",
+    background_color: "#ffffff",
+    display: "standalone",
+    scope: "/",
+    start_url: "/"
   }
 };

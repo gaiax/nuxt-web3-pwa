@@ -2,7 +2,7 @@
     <div class="container">
         <div>
             <logo />
-            <h1 class="title">nuxt-web3-nometamask</h1>
+            <h1 class="title">nuxt-web3-pwa</h1>
             <h2 class="subtitle">My best Nuxt.js project</h2>
 
             <div class="links" v-if="!isSignedIn">
